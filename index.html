@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- CSS  readable_area-->
+  <link rel="stylesheet" href="src/Readable_area CSS/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leitor de Livros</title>
+</head>
+<body>
+  <div class="container">  
+    <textarea id="book" class="form-control" name="" id="" cols="30" rows="10"></textarea>
+    <div class="text-center">
+      <button id="read" class="mt-4 btn btn-info">Ler!</button>
+    </div>
+  </div>
+
+  <!-- Readable_area -->
+  <div  id="readable_area">
+     <div id='words_here'>
+       aqui
+     </div> 
+  </div>
+  <!-- Bootstrap script -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.  js" ></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"   ></script>
+
+  <script>
+    // obs.: interval is to end our reading 
+     var book, words, interval
+
+    $("#read").click(()=>{
+    // Catching the "book"
+       book = $("#book").val();
+    
+    // Split
+      book = book.split(' ')
+
+    // Removine new line or \n 
+       words = [];
+
+      book.forEach((word)=>
+      {
+        // If the word has another word (sorry but is it)
+        word = word.split('\n')
+        if(word.length > 2)
+        {
+        
+          word.forEach((c)=>
+          {
+            if(!c=='')
+            {
+              words.push(c)
+            }    
+          })
+        }
+        else{
+        words.push(word[0])
+        }
+      })
+    
+    //Saying finish in the correct language
+      words.push("acabou :)")
+
+    // Showing "readable_area"
+      $("#readable_area").css("display","flex")
+
+    // Taking off "container"
+      $(".container").css("display","none")
+
+      reading()
+    })
+
+    function reading()
+    {
+      // Cont you know what is (if cont is 0 next'll be 1) and readAre is where we'll put the word
+        var cont = 0, readAre, length = words.length
+
+      // To don't show the previusly word
+        $("#readable_area").text('')
+        
+      // Doing "the magic"
+      interval = setInterval(()=>{
+          if(!(length === cont))
+          {
+            $("#readable_area").text(words[++cont])
+          }
+          else 
+            // To back to our original template
+              back()
+          
+        },300)
+    }
+
+    function back()
+    {
+      clearInterval(interval)
+
+      // Showing "container"
+        $(".container").css("display","block")
+
+      // Taking off "readable_area"
+        $("#readable_area").css("display","none")
+    }
+  </script>
+</body>
+</html>

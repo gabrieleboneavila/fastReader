@@ -1,0 +1,29 @@
+// Fonts
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+// Variables
+  $primary: #f9bf8f;
+  $secondary: #34222e;
+
+// Extends
+  %flex_basic
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+// Content
+  *{
+    font-family: 'Montserrat', sans-serif;
+  }
+  #readable_area{
+    height: 100vh;
+    display: none;
+    color: $secondary;
+    width: 100vw;
+    background-color: $primary;
+    @extend %flex_basic
+  }
+
+
